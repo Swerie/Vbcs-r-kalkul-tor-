@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Szerver Ár Kalkulátor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1e1e2f;
+      color: #fff;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input {
+      padding: 5px;
+      width: 100px;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      border-radius: 5px;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Szerver Ár Kalkulátor</h1>
+
+  <label>CPU (%):
+    <input type="number" id="cpu" value="100">
+  </label>
+
+  <label>RAM (GB):
+    <input type="number" id="ram" value="1">
+  </label>
+
+  <label>Disk (GB):
+    <input type="number" id="disk" value="5">
+  </label>
+
+  <label>Slot (db):
+    <input type="number" id="slot" value="1">
+  </label>
+
+  <label>Port (Network Allocation):
+    <input type="number" id="network" value="1">
+  </label>
+
+  <label>Backup (db):
+    <input type="number" id="backup" value="1">
+  </label>
+
+  <label>Database (db):
+    <input type="number" id="database" value="1">
+  </label>
+
+  <button onclick="calculate()">Számolás</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function calculate() {
+      const cpu = parseFloat(document.getElementById("cpu").value) || 0;
+      const ram = parseFloat(document.getElementById("ram").value) || 0;
+      const disk = parseFloat(document.getElementById("disk").value) || 0;
+      const slot = parseFloat(document.getElementById("slot").value) || 0;
+      const network = parseFloat(document.getElementById("network").value) || 0;
+      const backup = parseFloat(document.getElementById("backup").value) || 0;
+      const database = parseFloat(document.getElementById("database").value) || 0;
+
+      const cost = 
+        cpu * 1 +
+        ram * 85 +
+        disk * 10 +
+        slot * 1 +
+        network * 15 +
+        backup * 20 +
+        database * 15;
+
+      const usd = cost / 100;
+      const huf = usd * 370;
+
+      document.getElementById("result").innerHTML = `
+        <strong>Összesen:</strong><br>
+        ${cost.toFixed(0)} kredit<br>
+        ${usd.toFixed(2)} USD<br>
+        ${huf.toFixed(0)} Ft
+      `;
+    }
+  </script>
+
+</body>
+</html>
