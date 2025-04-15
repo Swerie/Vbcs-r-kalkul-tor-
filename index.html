@@ -43,15 +43,15 @@
   <h1>Szerver Ár Kalkulátor</h1>
 
   <label>CPU (%):
-    <input type="number" id="cpu" value="100">
+    <input type="number" id="cpu" value="400">
   </label>
 
   <label>RAM (GB):
-    <input type="number" id="ram" value="1">
+    <input type="number" id="ram" value="12">
   </label>
 
   <label>Disk (GB):
-    <input type="number" id="disk" value="5">
+    <input type="number" id="disk" value="10">
   </label>
 
   <label>Slot (db):
@@ -84,10 +84,13 @@
       const backup = parseFloat(document.getElementById("backup").value) || 0;
       const database = parseFloat(document.getElementById("database").value) || 0;
 
+      // 10 GB SSD ingyen
+      const paidDisk = Math.max(0, disk - 10);
+
       const cost = 
         cpu * 1 +
         ram * 85 +
-        disk * 10 +
+        paidDisk * 10 +
         slot * 1 +
         network * 15 +
         backup * 20 +
